@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 
@@ -36,6 +36,10 @@ function ThemeToggle() {
   )
 }
 
+function MenuIcon({ open }) {
+  return <span className="menu-icon" aria-hidden="true"><i /><i /><i className={open ? 'is-open' : ''} /></span>
+}
+
 function Comparison() {
   const baseUrl = import.meta.env.BASE_URL
   const [position, setPosition] = useState(50)
@@ -63,12 +67,39 @@ function Comparison() {
 }
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuButtonRef = useRef(null)
+
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape' && menuOpen) {
+        setMenuOpen(false)
+        menuButtonRef.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
+
+  const closeMenu = () => setMenuOpen(false)
+
   return (
     <>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="RC's Frontend Skill home"><Mark /><span>RC’S / FRONTEND</span></a>
-        <nav aria-label="Primary navigation"><a href="#compare">Transformation</a><a href="#workflow">Workflow</a><a href="#install">Install</a></nav>
-        <div className="header-actions"><ThemeToggle /><a className="header-cta" href="https://github.com/RitvikChunamari/rcs-frontend-skill">View on GitHub <Arrow /></a></div>
+        <nav className="primary-nav" id="primary-navigation" aria-label="Primary navigation" hidden={!menuOpen}>
+          <a href="#compare" onClick={closeMenu}>Transformation</a>
+          <a href="#workflow" onClick={closeMenu}>Workflow</a>
+          <a href="#install" onClick={closeMenu}>Install</a>
+          <a className="nav-github" href="https://github.com/RitvikChunamari/rcs-frontend-skill">View on GitHub <Arrow /></a>
+        </nav>
+        <div className="header-actions">
+          <ThemeToggle />
+          <a className="header-cta" href="https://github.com/RitvikChunamari/rcs-frontend-skill">View on GitHub <Arrow /></a>
+          <button ref={menuButtonRef} className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label={`${menuOpen ? 'Close' : 'Open'} navigation menu`} onClick={() => setMenuOpen((open) => !open)}>
+            <MenuIcon open={menuOpen} />
+          </button>
+        </div>
       </header>
 
       <main id="top">
