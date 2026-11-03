@@ -22,7 +22,7 @@ function ThemeToggle() {
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light')
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0d0e0d' : '#f1efe8')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#141214' : '#f5f1ea')
     localStorage.setItem('rcs-theme', theme)
   }, [theme])
   const nextTheme = theme === 'light' ? 'dark' : 'light'
