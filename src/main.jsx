@@ -3,14 +3,27 @@ import { createRoot } from 'react-dom/client'
 import './styles.css'
 
 const disciplines = [
-  ['01', 'Research', 'Find the right references. Extract principles. Never clone.'],
-  ['02', 'Direction', 'Choose a visual thesis, system, hierarchy, and interaction contract.'],
-  ['03', 'UX', 'Shape real journeys, responsive states, accessible semantics, and useful copy.'],
-  ['04', 'Build', 'Implement within the existing stack without breaking routes or data.'],
-  ['05', 'Motion + 3D', 'Add only what improves comprehension, with low-motion fallbacks.'],
-  ['06', 'Proof', 'Test the build, browser, keyboard, accessibility, performance, and APIs.'],
+  ['01', 'Research', 'Understand the audience, task, real content, and existing system. Turn references into original decisions.'],
+  ['02', 'Direction', 'Follow your direction, combine influences with clear roles, or choose from the product context and explain why.'],
+  ['03', 'Design', 'Define hierarchy, responsive states, and acceptance criteria. Review one rendered slice before extending the design.'],
+  ['04', 'Build', 'Use unit and component tests for behavior. Run the failing test, implement the change, pass it, then refactor.'],
+  ['05', 'Motion + 3D', 'Design purposeful motion with immediate feedback, interruption, cancellation, and reduced-motion alternatives.'],
+  ['06', 'Critique + QA', 'Inspect the rendered result, prioritize defects, repair them, and verify the affected views and user flows.'],
 ]
 const designDirections = ['Minimal', 'Editorial', 'Brutalist', 'Retro', 'Aurora', 'Immersive 3D', 'Glass', 'Kinetic', 'Tactile', 'Cyberpunk', 'Clay', 'Swiss']
+const directionModes = [
+  ['01', 'Set the direction.', 'Name a style, share references, or bring an existing design system. Your direction leads.'],
+  ['02', 'Combine influences.', 'Pair directions with a purpose. Swiss structure and editorial imagery can share one coherent system.'],
+  ['03', 'Let the brief decide.', 'RC’s considers the audience, task, content, platform, and constraints, then explains its choice.'],
+]
+const upgrades = [
+  ['01', 'Design before code.', 'A design contract defines hierarchy, states, and acceptance criteria. A rendered slice tests the idea early.'],
+  ['02', 'Test behavior first.', 'Unit and component tests protect logic and interaction. Test-driven development follows a failing test through a fix and refactor.'],
+  ['03', 'Critique, then refine.', 'Findings identify the location, impact, and repair. The agent rechecks the same screen and state after each fix.'],
+  ['04', 'Keep the system coherent.', 'New work respects your existing brand and components. Combined styles get distinct roles and shared tokens.'],
+  ['05', 'Make interaction resilient.', 'Motion supports the task. Keyboard access, readable type, cancellation, recovery, and reduced motion are part of the design.'],
+  ['06', 'Show the evidence.', 'Review test results, screenshots, and remaining gaps. Checks that do not apply need a reason; unrun checks stay visible.'],
+]
 const installCommand = 'npx skills add RitvikChunamari/rcs-frontend-skill'
 
 function Mark() {
@@ -96,19 +109,46 @@ function App() {
         <div className="hero-rail" aria-hidden="true"><span>01 / 07</span><i /><span>DESIGN → PROVE</span></div>
         <div className="hero-copy"><p className="hero-kicker"><span /> Design intelligence / Open source</p><h1 id="hero-title"><span>One skill.</span><strong>Full studio.</strong></h1></div>
         <div className="hero-tool" aria-hidden="true"><div className="tool-head"><span>The practice</span><span>01—06</span></div><ol className="tool-grid">{disciplines.map(([number, title]) => <li key={number}><span>{number}</span><span>{title}</span></li>)}</ol></div>
-        <div className="hero-foot"><p>Research, art direction, UX, motion, frontend engineering, accessibility, and release QA—working as one integrated practice.</p><a className="primary-button" href="#compare"><span>See the transformation</span><Arrow /></a></div>
+        <div className="hero-foot"><p>You set the direction—or RC’s chooses from your brief. Design, build, test, critique, and refine in one workflow.</p><a className="primary-button" href="#compare"><span>See the transformation</span><Arrow /></a></div>
         <div className="hero-proof" aria-hidden="true"><span>MIT</span><span>FREE</span><span>OPEN SOURCE</span><span>12 DIRECTIONS</span><span>1 WORKFLOW</span></div>
       </section>
 
       <section className="manifesto" aria-label="Product statement"><div className="section-index">02 / THESIS</div><p>A practice for AI coding agents.</p><h2>A one-stop <em>UX design skill</em> that thinks before it decorates—and proves before it claims.</h2></section>
 
-      <section className="comparison-section" id="compare" aria-labelledby="compare-title"><header className="section-heading"><span>03 / Transformation</span><h2 id="compare-title">Same brief.<br /><em>Different standard.</em></h2><p>The real Threadline landing page, before and after the complete RC’s Frontend workflow.</p></header><Comparison /></section>
+      <section className="comparison-section" id="compare" aria-labelledby="compare-title"><header className="section-heading"><span>03 / Transformation</span><h2 id="compare-title">Same brief.<br /><em>Different standard.</em></h2><p>An earlier Threadline design study. Explore the two implementations side by side.</p></header><Comparison /></section>
 
       <section className="workflow" id="workflow" aria-labelledby="workflow-title"><header className="section-heading inverse"><span>04 / One studio</span><h2 id="workflow-title">From loose idea<br />to <em>verified interface.</em></h2></header><ol className="discipline-list">{disciplines.map(([number, title, text]) => <li key={title}><span>{number}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
 
-      <section className="directions" aria-labelledby="directions-title"><div className="directions-title"><span>05 / Art direction atlas</span><h2 id="directions-title">12 directions.<br />One coherent choice.</h2><p>Style follows the product, the audience, and the task—not the trend cycle.</p></div><ol className="direction-grid">{designDirections.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><strong>{item}</strong><i aria-hidden="true" /></li>)}</ol></section>
+      <section className="directions" id="directions" aria-labelledby="directions-title">
+        <div className="directions-title">
+          <span>05 / Adaptive art direction</span>
+          <h2 id="directions-title">Your direction.<br />A combination.<br /><em>Or a considered choice.</em></h2>
+          <p>Start with a style or simply describe what you are building. The direction follows the work.</p>
+          <ol className="direction-modes">
+            {directionModes.map(([number, title, text]) => <li key={number}>
+              <span>{number}</span><div><h3>{title}</h3><p>{text}</p></div>
+            </li>)}
+          </ol>
+        </div>
+        <div className="atlas">
+          <p className="atlas-label">12 directions to draw from</p>
+          <ol className="direction-grid">{designDirections.map((item, index) =>
+            <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><strong>{item}</strong><i aria-hidden="true" /></li>
+          )}</ol>
+          <p className="atlas-note">An existing brand or a bespoke direction can be the better fit. The atlas is a starting point.</p>
+        </div>
+      </section>
 
-      <section className="principles" aria-labelledby="principles-title"><div className="principles-intro"><span>06 / Built-in standards</span><h2 id="principles-title">Taste with<br /><em>accountability.</em></h2></div><div className="principle-grid"><article><span>01</span><h3>Original by default.</h3><p>References become principles—not copied layouts, assets, or trade dress.</p></article><article><span>02</span><h3>Function before theater.</h3><p>Real routes, data, auth, and failure states survive the redesign.</p></article><article><span>03</span><h3>Access is the art direction.</h3><p>Keyboard, contrast, touch, motion preferences, and performance shape the work.</p></article><article><span>04</span><h3>Evidence over adjectives.</h3><p>Builds, screenshots, interactions, accessibility, and metrics are reported honestly.</p></article></div></section>
+      <section className="principles" aria-labelledby="principles-title">
+        <div className="principles-intro">
+          <span>06 / Upgraded workflow</span>
+          <h2 id="principles-title">Intent in the design.<br /><em>Evidence in the delivery.</em></h2>
+        </div>
+        <div className="principle-grid">{upgrades.map(([number, title, text]) =>
+          <article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>
+        )}</div>
+        <p className="workflow-note">RC’s guides your coding agent through these steps using the tools available in your environment.</p>
+      </section>
 
       <section className="install" id="install" aria-labelledby="install-title"><span className="install-index">07 / Install</span><h2 id="install-title">Add a studio<br />to your <em>agent.</em></h2><div className="command" role="group" aria-label="Installation command"><code>{installCommand}</code><button type="button" onClick={copyInstall} aria-label="Copy installation command">{copied ? 'Copied' : 'Copy'}</button></div><p className="copy-status" aria-live="polite">{copied ? 'Installation command copied.' : copyError ? 'Copy unavailable. Select and copy the command above.' : ''}</p><div className="install-actions"><a className="primary-button light" href="https://github.com/RitvikChunamari/rcs-frontend-skill"><span>Open the repository</span><Arrow /></a><a className="text-link" href="#top">Back to top ↑</a></div><p className="install-note">Free and open source · MIT licensed · Built for Claude Code, Codex, Cursor, and compatible AI coding agents.</p></section>
     </main>
