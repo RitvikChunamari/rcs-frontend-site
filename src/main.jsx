@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
+import Comparison from './Comparison.jsx'
 
 const disciplines = [
   ['01', 'Research', 'Understand the audience, task, real content, and existing system. Turn references into original decisions.'],
@@ -42,20 +43,6 @@ function ThemeToggle() {
   return <button className="theme-toggle" type="button" onClick={() => setTheme(nextTheme)} aria-label={`Switch to ${nextTheme} mode`} aria-pressed={theme === 'dark'}><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" /><path d="M8 3a5 5 0 0 1 0 10Z" fill="currentColor" /></svg><span>{theme === 'light' ? 'Dark' : 'Light'}</span></button>
 }
 
-function Comparison() {
-  const baseUrl = import.meta.env.BASE_URL
-  const [position, setPosition] = useState(50)
-  return <div className="compare-shell">
-    <div className="compare-toolbar"><div className="compare-labels" aria-hidden="true"><span>Threadline / Design study</span></div><div className="compare-actions" aria-label="Comparison presets"><button type="button" aria-pressed={position === 0} onClick={() => setPosition(0)}>Before</button><button type="button" aria-pressed={position === 100} onClick={() => setPosition(100)}>After</button></div></div>
-    <div className="compare-viewport" style={{ '--split': `${position}%` }}>
-      <iframe title="Threadline website before RC's Frontend Skill" src={`${baseUrl}comparison/before/index.html`} tabIndex="-1" aria-hidden="true" />
-      <div className="after-layer" aria-hidden="true"><iframe title="" src={`${baseUrl}comparison/after/index.html`} tabIndex="-1" /></div>
-      <div className="comparison-captions" aria-hidden="true"><span style={{ visibility: position > 20 ? "visible" : "hidden" }}>With the skill</span><span style={{ visibility: position < 80 ? "visible" : "hidden" }}>Without the skill</span></div><div className="compare-seam" aria-hidden="true"><span>↔</span></div>
-      <label className="range-label"><span className="visually-hidden">Show after design percentage: {position}%</span><input type="range" min="0" max="100" value={position} onChange={(event) => setPosition(Number(event.target.value))} aria-valuetext={`${position}% after design`} /></label>
-    </div>
-    <p className="compare-help">Drag the seam · Use arrow keys · Choose a side</p>
-  </div>
-}
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -115,7 +102,7 @@ function App() {
 
       <section className="manifesto" aria-label="Product statement"><div className="section-index">02 / THESIS</div><p>A practice for AI coding agents.</p><h2>A one-stop <em>UX design skill</em> that thinks before it decorates—and proves before it claims.</h2></section>
 
-      <section className="comparison-section" id="compare" aria-labelledby="compare-title"><header className="section-heading"><span>03 / Transformation</span><h2 id="compare-title">Same brief.<br /><em>Different standard.</em></h2><p>An earlier Threadline design study. Explore the two implementations side by side.</p></header><Comparison /></section>
+      <section className="comparison-section" id="compare" aria-labelledby="compare-title"><header className="section-heading"><span>03 / Transformation</span><h2 id="compare-title">See the craft.<br /><em>Try the difference.</em></h2><p>Compare the original Threadline landing page with an expanded, working reference. Then step inside the design.</p></header><Comparison /></section>
 
       <section className="workflow" id="workflow" aria-labelledby="workflow-title"><header className="section-heading inverse"><span>04 / One studio</span><h2 id="workflow-title">From loose idea<br />to <em>verified interface.</em></h2></header><ol className="discipline-list">{disciplines.map(([number, title, text]) => <li key={title}><span>{number}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
 
